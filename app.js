@@ -46,11 +46,11 @@ let currentItem = 0;
 
 //load initial item
 window.addEventListener("DOMContentLoaded", function(){
-  showPerson(currentItem);
+  showPerson();
 });
 
-function showPerson(person){
-  const  item = reviews[person];
+function showPerson(){
+  const  item = reviews[currentItem];
   img.src = item.img;
   author.textContent = item.name;
   job.textContent = item.job;
@@ -59,8 +59,29 @@ function showPerson(person){
 }
 
 nextBtn.addEventListener("click", function () {
- 
+
   currentItem++;
-  showPerson(currentItem);
+  if (currentItem > reviews.length - 1){
+    currentItem = 0;
+  }
+ 
+  showPerson();
 
 });
+
+prevBtn.addEventListener("click", function () {
+  currentItem--;
+  if (currentItem < 0){
+    currentItem = reviews.length -1
+  }
+  showPerson();
+
+
+});
+
+//generating a random number to serve as the array number for current item
+randomBtn.addEventListener("click", function(){
+  currentItem = Math.floor(Math.random() * reviews.length);
+  showPerson()
+
+})
